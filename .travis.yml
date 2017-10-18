@@ -55,6 +55,25 @@ matrix:
       env:
         - BUILD_SHARED_LIBS=0 CMAKE_BUILD_TYPE=RelWithDebInfo
 
+    # osx
+    - os: osx
+      env:
+        - BUILD_SHARED_LIBS=1 CMAKE_BUILD_TYPE=Debug
+
+    # osx
+    - os: osx
+      env:
+        - BUILD_SHARED_LIBS=0 CMAKE_BUILD_TYPE=Debug
+
+    # osx
+    - os: osx
+      env:
+        - BUILD_SHARED_LIBS=1 CMAKE_BUILD_TYPE=RelWithDebInfo
+
+    # osx
+    - os: osx
+      env:
+        - BUILD_SHARED_LIBS=0 CMAKE_BUILD_TYPE=RelWithDebInfo
 
 script:
   - git clone https://github.com/aadityakalsi/cproj
