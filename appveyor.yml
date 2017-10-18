@@ -12,9 +12,9 @@ configuration:
   - Debug
   - Release
 
-build:
-  # path to Visual Studio solution or project
-  project: c:/projects/cproj-test/cproj/foo/build/INSTALL.vcxproj
+#build:
+#  # path to Visual Studio solution or project
+#  project: c:/projects/cproj-test/cproj/foo/build/INSTALL.vcxproj
 
 # scripts to run before build
 before_build:
