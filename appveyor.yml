@@ -24,10 +24,9 @@ before_build:
   - cd cproj
   - bash -c "./clone.sh foo"
   - cd foo
-  - bash -c "echo Running: \$ env CMAKE_BUILD_TYPE=%configuration% -DBUILD_SHARED_LIBS=%shared% ./tests-install.sh"
-  - cmd: if "%platform%"=="x86" bash -c "env GENERATOR='Visual Studio 14' CMAKE_BUILD_TYPE=$configuration -DBUILD_SHARED_LIBS=$shared ./tests-install.sh"
-  - cmd: if "%platform%"=="x64" bash -c "env GENERATOR='Visual Studio 14 Win64' CMAKE_BUILD_TYPE=$configuration -DBUILD_SHARED_LIBS=$shared ./tests-install.sh"
+  - cmd: if "%platform%"=="x86" bash -c "env GENERATOR='Visual Studio 14' CMAKE_BUILD_TYPE=$configuration BUILD_SHARED_LIBS=$shared ./tests-install.sh"
+  - cmd: if "%platform%"=="x64" bash -c "env GENERATOR='Visual Studio 14 Win64' CMAKE_BUILD_TYPE=$configuration BUILD_SHARED_LIBS=$shared ./tests-install.sh"
   # success
-  - cd _install && 7z a "../foo-%configuration%-%platform%.zip" * && cd ..
-  - appveyor PushArtifact "foo-%configuration%-%platform%.zip"
+  - cmd: if "%shared%"=="0" cd _install && 7z a "../foo-%configuration%-%platform%-static.zip" * && cd .. && appveyor PushArtifact "foo-%configuration%-%platform%-static.zip"
+  - cmd: if "%shared%"=="1" cd _install && 7z a "../foo-%configuration%-%platform%-shared.zip" * && cd .. && appveyor PushArtifact "foo-%configuration%-%platform%-shared.zip"
   - appveyor exit
