@@ -9,6 +9,11 @@ configuration:
   - Debug
   - Release
 
+environment:
+  matrix:
+    - shared: 0
+    - shared: 1
+
 build:
   # path to Visual Studio solution or project
   project: c:/projects/cproj-test/cproj/foo/build/INSTALL.vcxproj
@@ -23,5 +28,5 @@ before_build:
   - cd foo
   - mkdir build
   - cd build
-  - cmd: if "%platform%"=="x86" cmake -G"Visual Studio 15"  ..
-  - cmd: if "%platform%"=="x64" cmake -G"Visual Studio 15 Win64" ..
+  - cmd: if "%platform%"=="x86" cmake -G"Visual Studio 15"  .. -DCMAKE_BUILD_TYPE="%configuration%" -DBUILD_SHARED_LIBS="%shared%"
+  - cmd: if "%platform%"=="x64" cmake -G"Visual Studio 15 Win64" .. -DCMAKE_BUILD_TYPE="%configuration%" -DBUILD_SHARED_LIBS="%shared%"
