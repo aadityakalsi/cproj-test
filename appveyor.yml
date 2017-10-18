@@ -1,0 +1,27 @@
+environment:
+  PROJ: "c:/projects/cproj-test"
+
+platform:
+  - x86
+  - x64
+
+configuration:
+  - Debug
+  - Release
+
+build:
+  # path to Visual Studio solution or project
+  project: c:/projects/cproj-test/cproj/foo/build/INSTALL.vcxproj
+
+# scripts to run before build
+before_build:
+  - echo Running cmake...
+  - cd /d %PROJ%
+  - git clone https://github.com/aadityakalsi/cproj
+  - cd cproj
+  - bash -c "./clone.sh foo"
+  - cd foo
+  - mkdir build
+  - cd build
+  - cmd: if "%platform%"=="x86" cmake -G"Visual Studio 15"  ..
+  - cmd: if "%platform%"=="x64" cmake -G"Visual Studio 15 Win64" ..
