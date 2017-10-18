@@ -1,0 +1,24 @@
+language: cpp
+
+matrix:
+  include:
+    # linux
+    - os: linux
+      addons:
+        apt:
+          sources:
+            - george-edison55-precise-backports
+            - debian-sid
+          packages:
+            - cmake
+            - cmake-data
+      env:
+        - BUILD_SHARED_LIBS=1 CMAKE_BUILD_TYPE=Debug
+        - BUILD_SHARED_LIBS=0 CMAKE_BUILD_TYPE=Debug
+        - BUILD_SHARED_LIBS=1 CMAKE_BUILD_TYPE=RelWithDebInfo
+        - BUILD_SHARED_LIBS=0 CMAKE_BUILD_TYPE=RelWithDebInfo
+    
+script:
+  - git clone https://github.com/aadityakalsi/cproj
+  - cd cproj && ./clone.sh foo
+  - cd cproj/foo && env BUILD_SHARED_LIBS="${BUILD_SHARED_LIBS}" CMAKE_BUILD_TYPE="${CMAKE_BUILD_TYPE}" ./tests-install.sh
