@@ -1,5 +1,8 @@
 environment:
   PROJ: "c:/projects/cproj-test"
+  matrix:
+    - shared: 0
+    - shared: 1
 
 platform:
   - x86
@@ -8,11 +11,6 @@ platform:
 configuration:
   - Debug
   - Release
-
-environment:
-  matrix:
-    - shared: 0
-    - shared: 1
 
 build:
   # path to Visual Studio solution or project
